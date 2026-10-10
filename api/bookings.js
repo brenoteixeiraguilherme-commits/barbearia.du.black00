@@ -20,7 +20,8 @@ export default async function handler(req, res) {
   if (day === 0) return res.status(400).json({ error: 'A barbearia não atende aos domingos.' });
   const [hh, mm] = booking_time.split(':').map(Number);
   const mins = hh * 60 + mm;
-  if (mins < 540 || mins >= 1200 || mm % 30 !== 0) return res.status(400).json({ error: 'Escolha um horário entre 09h e 20h, em intervalos de 30 minutos.' });
+  const requestedDuration = Math.min(240, Math.max(15, Number(duration_minutes) || 30));
+  if (mins < 540 || mins >= 1200 || mins + requestedDuration > 1200 || mm % 30 !== 0) return res.status(400).json({ error: 'Escolha um horário entre 09h e 20h que permita concluir o serviço antes do fechamento.' });
   const dateTime = new Date(booking_date + 'T' + booking_time + ':00');
   if (Number.isNaN(dateTime.getTime())) return res.status(400).json({ error: 'Data inválida.' });
 
@@ -33,7 +34,7 @@ export default async function handler(req, res) {
     barber: (typeof barber === 'string' && barber.trim() ? barber.trim() : 'A definir').slice(0, 80),
     booking_date,
     booking_time,
-    duration_minutes: Math.min(240, Math.max(15, Number(duration_minutes) || 30)),
+    duration_minutes: requestedDuration,
     status: 'confirmed'
   };
 
