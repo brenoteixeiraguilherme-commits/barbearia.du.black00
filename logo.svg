@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+<rect width="120" height="120" rx="12" fill="#090909"/>
+<circle cx="60" cy="60" r="55" fill="none" stroke="#d6ad61" stroke-width="2"/>
+<g fill="#f7f5f0">
+<circle cx="39" cy="31" r="13"/><circle cx="53" cy="23" r="15"/><circle cx="69" cy="23" r="15"/><circle cx="83" cy="31" r="13"/><circle cx="31" cy="44" r="13"/><circle cx="89" cy="44" r="13"/><circle cx="34" cy="57" r="12"/><circle cx="86" cy="57" r="12"/>
+<path d="M36 44 Q60 34 84 44 L82 64 Q76 76 60 77 Q44 76 38 64Z"/>
+<path d="M39 61 Q28 67 31 79 Q39 90 49 88 L60 83 L71 88 Q84 90 89 79 Q92 67 81 61 L77 74 L60 80 L43 74Z"/>
+</g><path d="M44 49 Q51 45 56 49 M64 49 Q70 45 76 49" fill="none" stroke="#090909" stroke-width="3" stroke-linecap="round"/>
+<path d="M50 60 Q60 66 70 60" fill="none" stroke="#090909" stroke-width="3" stroke-linecap="round"/>
+<path d="M44 88 L76 88" stroke="#d6ad61" stroke-width="3" stroke-linecap="round"/>
+<text x="60" y="104" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#d6ad61" text-anchor="middle" letter-spacing="1.5">DU BLACK</text></svg>
