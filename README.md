@@ -1,18 +1,35 @@
 # Barbearia Du Black
 
-Site estático responsivo para a Barbearia Du Black.
+Site responsivo para a Barbearia Du Black, com identidade preto/branco/dourado e detalhes verdes, serviços e preços, catálogo de cortes, galeria, apresentação, contato, formulário de agendamento e configuração local.
 
-## Conteúdo
-- Página inicial com identidade visual urbana, preto, dourado e detalhes verdes.
-- Catálogo ilustrativo de cortes e tabela de preços editáveis.
-- Formulário de consulta de horário com encaminhamento para WhatsApp.
-- Seções sobre, galeria, avaliações-placeholder, perguntas frequentes e contato.
-- Configurações locais acessadas no rodapé em **Configurar site**.
+## O que já está no projeto
+- Site estático em `index.html`, responsivo para celular e computador.
+- Catálogo de serviços e cortes com preços iniciais editáveis.
+- WhatsApp configurável e endereço com link para o Google Maps.
+- Formulário ligado à rota `/api/bookings`.
+- API serverless em `api/bookings.js` para registrar agendamentos no Supabase.
+- Estrutura de banco em `schema.sql`, com restrição para impedir sobreposição de reservas do mesmo barbeiro.
+- Configuração de deploy para Vercel em `vercel.json`.
 
-## Importante antes de usar em produção
-O agendamento está em **modo demonstração**. Não grava reservas em banco de dados e não bloqueia horários ocupados. Os preços, o endereço e o número do WhatsApp configurados no painel atual são salvos apenas no navegador local e não alteram a configuração para todos os visitantes.
+## Ativar agendamentos reais
+O agendamento **não estará ativo até configurar o Supabase e as variáveis no Vercel**:
 
-Para receber agendamentos reais, conectar um banco de dados (por exemplo, Supabase/Postgres), criar autenticação administrativa e validar a disponibilidade no servidor com uma restrição única para barbeiro/data/horário.
+1. Crie um projeto Supabase.
+2. No SQL Editor do Supabase, execute o conteúdo de `schema.sql`.
+3. No projeto Vercel, adicione as variáveis de ambiente:
+   - `SUPABASE_URL`: URL do projeto Supabase.
+   - `SUPABASE_SERVICE_ROLE_KEY`: chave service-role do Supabase. Mantenha-a somente nas variáveis privadas do servidor; nunca coloque essa chave no HTML.
+4. Faça um novo deploy e teste uma reserva e duas tentativas para o mesmo horário.
 
-## Publicar no Vercel
-Importe este repositório no Vercel. Como é um site HTML/CSS/JS estático, não precisa de comando de build; use `index.html` como página inicial.
+A API retorna erro se o Supabase não estiver configurado. O site não deve afirmar que uma reserva foi feita sem receber confirmação do servidor.
+
+## Limitações que ainda precisam ser resolvidas
+- O painel atual de preços/endereço/WhatsApp salva no navegador local; não é um painel administrativo global, com login e banco.
+- O horário é validado no servidor, mas a interface ainda não consulta e oculta previamente todos os horários já ocupados.
+- O endereço, o WhatsApp e as redes sociais oficiais devem ser informados pelo proprietário antes da publicação.
+- Substitua as fotos ilustrativas pelas fotos reais da barbearia e do barbeiro antes de publicar.
+- As avaliações estão como espaços reservados; só publique depoimentos reais com autorização.
+- A marca SVG é provisória e deve ser substituída pela logo oficial, se necessário.
+
+## Deploy
+Importe este repositório no Vercel. É um site HTML com uma rota serverless em `api/bookings.js`. Após configurar as variáveis de ambiente e o SQL, faça redeploy.
